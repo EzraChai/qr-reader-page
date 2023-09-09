@@ -1,5 +1,7 @@
 ---
+import { Image } from "astro:assets";
 import Layout from "../layouts/Layout.astro";
+import MockupImage from "../assets/images/Mockup.png"
 ---
 
 <Layout title="Download the QR Reader App now">
@@ -25,21 +27,22 @@ import Layout from "../layouts/Layout.astro";
 
       <a
         href="/apk/code-reader_v2.0.0.apk"
-        class="mt-6 md:mt-12 bg-neutral-900 rounded-md text-white flex justify-center items-center gap-2 px-4 font-bold text-lg py-2 transition hover:bg-neutral-700"
+        class="mt-10 md:mt-12 bg-neutral-900 rounded-md text-white flex justify-center items-center gap-2 px-4 font-bold text-lg py-2 transition hover:bg-neutral-700"
       >
         <span class="material-symbols-outlined"> android</span>Download for
         Android</a
       >
     </div>
-    <div class="flex justify-center md:justify-end mt-16 md:mt-32">
-      <div class="z-10 h-full w-96">
+    <div class="flex justify-center md:justify-end mt-16 md:mt-24">
+      <Image src={MockupImage}  class="w-96 object-contain object-center " alt="Mockup for the app"/>
+      <!-- <div class="z-10 h-full w-96">
         <img src="/mockup.png" alt="MockUp" />
       </div>
       <img
         class="absolute w-[17.6rem] md:w-72 md:mr-12 mt-14"
         src="/app_details.jpg"
         alt="MockUp"
-      />
+      /> -->
     </div>
   </main>
 </Layout>
