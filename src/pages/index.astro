@@ -1,7 +1,9 @@
 ---
 import { Image } from "astro:assets";
 import Layout from "../layouts/Layout.astro";
-import MockupImage from "../assets/images/Mockup.png"
+import MockupImage from "../assets/images/Mockup.png";
+import QRImage from "../assets/images/file-qr.png";
+import LogoIcon from "../assets/images/file-qr-remove-bg.png";
 ---
 
 <Layout title="Download the QR Reader App now">
@@ -25,16 +27,81 @@ import MockupImage from "../assets/images/Mockup.png"
         </h3>
       </div>
 
-      <a
-        href="/apk/code-reader_v2.0.0.apk"
-        class="mt-10 md:mt-12 bg-neutral-900 rounded-md text-white flex justify-center items-center gap-2 px-4 font-bold text-lg py-2 transition hover:bg-neutral-700"
+      <div class="flex gap-2">
+        <a
+          href="/apk/code-reader_v2.0.0.apk"
+          class="mt-10 md:mt-12 bg-neutral-900 rounded-md text-white flex justify-center items-center gap-2 px-4 font-bold text-lg py-2 transition hover:bg-neutral-700"
+        >
+          <span class="material-symbols-outlined">android</span>Download for
+          Android</a
+        >
+        <button
+        id="openModal"
+          class="mt-10 md:mt-12 bg-neutral-900 rounded-md text-white flex justify-center items-center gap-2 px-4 font-bold text-lg py-2 transition hover:bg-neutral-700"
+        >
+          <span
+            ><Image
+              class="w-8 h-8 invert"
+              src={LogoIcon}
+              alt={"QR code"}
+            /></span
+          >
+        </button>
+      </div>
+      <dialog
+        class="backdrop:backdrop-blur-md backdrop:bg-black/50 rounded-lg"
+        id="QrDialog"
       >
-        <span class="material-symbols-outlined"> android</span>Download for
-        Android</a
-      >
+        <form>
+          <button
+            id="closeModal"
+            type="button"
+            class="float-right lg:mb-1 rounded-full flex justify-center items-center p-1"
+            value="cancel"
+            formmethod="dialog"
+          >
+            <span class="material-symbols-outlined">close</span>
+          </button>
+          <div>
+            <Image
+              class={"rounded-lg overflow-hidden mt-6"}
+              src={QRImage}
+              alt={"QR Code to download app."}
+            />
+          </div>
+        </form>
+      </dialog>
+      <script>
+        const modal = document.getElementById("QrDialog");
+        console.log(modal)
+
+        document.getElementById("openModal").addEventListener("click", (e) => {
+          modal.showModal();
+        });
+         document.getElementById("closeModal").addEventListener("click", (e) => {
+          modal.close();
+        });
+
+        modal?.addEventListener("click", e => {
+          const dialogDimensions = modal.getBoundingClientRect()
+          if(
+            e.clientX < dialogDimensions.left ||
+            e.clientX > dialogDimensions.right || 
+            e.clientY < dialogDimensions.top ||
+            e.clientY > dialogDimensions.bottom
+          ){
+            modal.close();
+          }
+        })
+      </script>
     </div>
+
     <div class="flex justify-center md:justify-end mt-16 md:mt-24">
-      <Image src={MockupImage}  class="w-96 object-contain object-center " alt="Mockup for the app"/>
+      <Image
+        src={MockupImage}
+        class="w-96 object-contain object-center"
+        alt="Mockup for the app"
+      />
       <!-- <div class="z-10 h-full w-96">
         <img src="/mockup.png" alt="MockUp" />
       </div>
