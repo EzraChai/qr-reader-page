@@ -52,7 +52,23 @@ import LogoIcon from "../assets/images/file-qr-remove-bg.png";
         class="backdrop:backdrop-blur-md backdrop:bg-black/50 rounded-lg"
         id="QrDialog"
       >
+       <style is:inline>
+
+          #QrDialog[open] , dialog::backdrop {
+            animation: myFadeIn 0.5s ease normal;
+          }
+
+           @keyframes myFadeIn{
+            from {
+              opacity: 0;
+            }
+            to {
+              opacity: 1;
+            }
+          }
+        </style>
         <form>
+          <div class=" float-left ml-2 text-xl text-center text-neutral-800">Scan to download</div>
           <button
             id="closeModal"
             type="button"
@@ -112,4 +128,5 @@ import LogoIcon from "../assets/images/file-qr-remove-bg.png";
       /> -->
     </div>
   </main>
+ 
 </Layout>
